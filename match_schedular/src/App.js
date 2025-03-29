@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { HashRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import League from "./pages/League";
 import RoundRobin from "./pages/RoundRobin";
 import Knockout from "./pages/Knockout";
@@ -16,13 +16,13 @@ const App = () => {
 };
 
 const Main = () => {
-    const navigate = useNavigate(); // ✅ Use navigate to change pages
+    const navigate = useNavigate();
     const [format, setFormat] = useState("");
 
     const handleFormatChange = (e) => {
         const selectedFormat = e.target.value;
         setFormat(selectedFormat);
-        if (selectedFormat) navigate(`/${selectedFormat}`); // ✅ Navigate on change
+        if (selectedFormat) navigate(`/${selectedFormat}`);
     };
 
     return (

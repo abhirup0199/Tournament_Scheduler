@@ -2,7 +2,7 @@
   "name": "tournament-scheduler",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://abhirup0199.github.io/Tournament_Scheduler",
+  "homepage": "https://abhirup0199.github.io/Tournament_Scheduler/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
