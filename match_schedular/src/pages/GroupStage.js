@@ -2,56 +2,60 @@ import React, { useState } from "react";
 
 const GroupStage = () => {
     const [teams, setTeams] = useState([]);
+    const [homeStadiums, setHomeStadiums] = useState({});
+    const [neutralStadiums, setNeutralStadiums] = useState([]);
     const [newTeam, setNewTeam] = useState("");
-    const [groups, setGroups] = useState({});
+    const [newStadium, setNewStadium] = useState("");
+    const [schedule, setSchedule] = useState([]);
 
     const addTeam = () => {
         if (newTeam.trim() !== "") {
             setTeams([...teams, newTeam.trim()]);
-            setNewTeam("");
+            setNewTeam(""); 
         }
     };
 
-    const generateGroups = () => {
-        if (teams.length < 4) {
-            alert("Group Stage needs at least 4 teams.");
-            return;
+    const addHomeStadium = () => {
+        if (newTeam.trim() !== "" && newStadium.trim() !== "") {
+            setHomeStadiums({ ...homeStadiums, [newTeam]: newStadium.trim() });
+            setNewStadium(""); 
         }
+    };
 
-        let groupCount = Math.ceil(teams.length / 4);
-        let shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
-        let generatedGroups = {};
-
-        for (let i = 0; i < groupCount; i++) {
-            generatedGroups[`Group ${i + 1}`] = shuffledTeams.splice(0, 4);
+    const addNeutralStadium = () => {
+        if (newStadium.trim() !== "") {
+            setNeutralStadiums([...neutralStadiums, newStadium.trim()]);
+            setNewStadium("");
         }
+    };
 
-        setGroups(generatedGroups);
+    const generateSchedule = () => {
+        let matches = [];
+        for (let i = 0; i < teams.length; i++) {
+            for (let j = i + 1; j < teams.length; j++) {
+                let stadium = neutralStadiums[Math.floor(Math.random() * neutralStadiums.length)] || "TBA";
+                matches.push(`${teams[i]} vs ${teams[j]} at ${stadium}`);
+            }
+        }
+        setSchedule(matches);
     };
 
     return (
         <div>
             <h2>Group Stage Tournament</h2>
-            <input
-                type="text"
-                value={newTeam}
-                onChange={(e) => setNewTeam(e.target.value)}
-                placeholder="Enter team name"
-            />
-            <button onClick={addTeam}>Add Team</button>
-            <button onClick={generateGroups}>Generate Groups</button>
 
-            <h3>Groups:</h3>
-            {Object.keys(groups).map((group, index) => (
-                <div key={index}>
-                    <h4>{group}</h4>
-                    <ul>
-                        {groups[group].map((team, idx) => (
-                            <li key={idx}>{team}</li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
+            <input type="text" value={newTeam} onChange={(e) => setNewTeam(e.target.value)} placeholder="Enter team name" />
+            <button onClick={addTeam}>Add Team</button>
+
+            <button onClick={addNeutralStadium}>Add Neutral Stadium</button>
+
+            <button onClick={generateSchedule}>Generate Schedule</button>
+
+            <ul>
+                {schedule.map((match, index) => (
+                    <li key={index}>{match}</li>
+                ))}
+            </ul>
         </div>
     );
 };
