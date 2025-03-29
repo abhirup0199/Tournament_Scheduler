@@ -2,27 +2,52 @@ import React, { useState } from "react";
 
 const GroupStage = () => {
     const [teams, setTeams] = useState([]);
-    const [groups, setGroups] = useState([]);
+    const [newTeam, setNewTeam] = useState("");
+    const [groups, setGroups] = useState({});
+
+    const addTeam = () => {
+        if (newTeam.trim() !== "") {
+            setTeams([...teams, newTeam.trim()]);
+            setNewTeam("");
+        }
+    };
 
     const generateGroups = () => {
-        const numGroups = 2;
-        let shuffled = [...teams].sort(() => 0.5 - Math.random());
-        let groupA = shuffled.slice(0, shuffled.length / numGroups);
-        let groupB = shuffled.slice(shuffled.length / numGroups);
+        if (teams.length < 4) {
+            alert("Group Stage needs at least 4 teams.");
+            return;
+        }
 
-        setGroups([groupA, groupB]);
+        let groupCount = Math.ceil(teams.length / 4);
+        let shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
+        let generatedGroups = {};
+
+        for (let i = 0; i < groupCount; i++) {
+            generatedGroups[`Group ${i + 1}`] = shuffledTeams.splice(0, 4);
+        }
+
+        setGroups(generatedGroups);
     };
 
     return (
         <div>
-            <h2>Group Stage</h2>
+            <h2>Group Stage Tournament</h2>
+            <input
+                type="text"
+                value={newTeam}
+                onChange={(e) => setNewTeam(e.target.value)}
+                placeholder="Enter team name"
+            />
+            <button onClick={addTeam}>Add Team</button>
             <button onClick={generateGroups}>Generate Groups</button>
-            {groups.map((group, i) => (
-                <div key={i}>
-                    <h3>Group {i + 1}</h3>
+
+            <h3>Groups:</h3>
+            {Object.keys(groups).map((group, index) => (
+                <div key={index}>
+                    <h4>{group}</h4>
                     <ul>
-                        {group.map((team, index) => (
-                            <li key={index}>{team}</li>
+                        {groups[group].map((team, idx) => (
+                            <li key={idx}>{team}</li>
                         ))}
                     </ul>
                 </div>
