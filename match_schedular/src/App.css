@@ -1,65 +1,72 @@
-/* Overall App Styling */
-.app-container {
-  font-family: "Xeroda", sans-serif; /* Techy font */
-  background-color: #121212; /* Cold-toned dark */
-  color: gold; /* Gold highlights */
-  min-height: 100vh;
+/* General Styling */
+body {
+  font-family: "Xeroda", sans-serif;
+  background-color: #0a0f1d; /* Cold dark blue */
+  color: #ffd700; /* Gold highlights */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container */
+.container {
+  background-color: rgba(20, 25, 45, 0.9); /* Dark translucent card */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.5);
   text-align: center;
-  padding: 20px;
+  max-width: 600px;
+  width: 100%;
 }
 
-/* Title */
-.title {
-  font-size: 2.5rem;
-  text-transform: uppercase;
+/* Headings */
+h1 {
+  font-size: 2rem;
   margin-bottom: 20px;
 }
 
-/* Tournament Selector */
-.tournament-selector select {
-  font-size: 1.2rem;
+/* Dropdown */
+select {
+  font-size: 1rem;
   padding: 10px;
-  margin-bottom: 20px;
-  background: #222;
-  color: gold;
-  border: 1px solid gold;
+  border-radius: 5px;
+  background-color: #1b2336;
+  color: #ffd700;
+  border: 1px solid #ffd700;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Inputs */
+input {
+  font-size: 1rem;
+  padding: 10px;
+  width: 80%;
+  margin: 10px 0;
+  background-color: #1b2336;
+  color: #ffd700;
+  border: 1px solid #ffd700;
+  border-radius: 5px;
+  outline: none;
 }
 
 /* Buttons */
 button {
   font-size: 1rem;
-  padding: 8px 12px;
+  padding: 10px 15px;
   margin: 10px;
-  background: gold;
-  color: #121212;
+  background: linear-gradient(90deg, #ffd700, #ffb700);
   border: none;
+  color: #000;
   cursor: pointer;
-  transition: 0.3s;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
 }
 
 button:hover {
-  background: #ffcc00;
-}
-
-/* Input Fields */
-input {
-  padding: 8px;
-  font-size: 1rem;
-  margin-right: 10px;
-  background: #222;
-  color: gold;
-  border: 1px solid gold;
-}
-
-/* List */
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  padding: 5px;
-  background: #333;
-  margin: 5px;
-  border-radius: 5px;
+  background: linear-gradient(90deg, #ffb700, #ffd700);
+  transform: scale(1.1);
 }

@@ -1,0 +1,58 @@
+.tournament-container {
+    background: rgba(20, 25, 45, 0.95);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.5);
+    text-align: center;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+h2 {
+    color: #ffd700;
+}
+
+.input-section {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+input {
+    font-size: 1rem;
+    padding: 10px;
+    background-color: #1b2336;
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    font-size: 1rem;
+    padding: 10px 15px;
+    background: linear-gradient(90deg, #ffd700, #ffb700);
+    border: none;
+    color: #000;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #ffb700, #ffd700);
+    transform: scale(1.1);
+}
+
+.team-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.team-list li {
+    background: rgba(255, 215, 0, 0.2);
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}

@@ -1,83 +1,96 @@
 import React, { useState } from "react";
+import "./League.css"; // Add a new CSS file for styling
 
 const League = () => {
     const [teams, setTeams] = useState([]);
-    const [homeStadiums, setHomeStadiums] = useState({});
-    const [neutralStadiums, setNeutralStadiums] = useState([]);
     const [newTeam, setNewTeam] = useState("");
-    const [newStadium, setNewStadium] = useState("");
-    const [schedule, setSchedule] = useState([]);
-    const [useHomeVenues, setUseHomeVenues] = useState(false);
+    const [homeStadiums, setHomeStadiums] = useState([]);
+    const [neutralStadiums, setNeutralStadiums] = useState([]);
+    const [newHomeStadium, setNewHomeStadium] = useState("");
+    const [newNeutralStadium, setNewNeutralStadium] = useState("");
 
-    // Add team
+    // Add new team
     const addTeam = () => {
-        if (newTeam.trim() !== "" && !teams.includes(newTeam.trim())) {
-            setTeams([...teams, newTeam.trim()]);
-            setNewTeam(""); 
+        if (newTeam.trim() !== "" && !teams.includes(newTeam)) {
+            setTeams([...teams, newTeam]);
+            setNewTeam("");
         }
     };
 
-    // Add home stadium for a team
+    // Add new home stadium
     const addHomeStadium = () => {
-        if (newTeam.trim() !== "" && newStadium.trim() !== "") {
-            setHomeStadiums({ ...homeStadiums, [newTeam]: newStadium.trim() });
-            setNewStadium(""); 
+        if (newHomeStadium.trim() !== "" && !homeStadiums.includes(newHomeStadium)) {
+            setHomeStadiums([...homeStadiums, newHomeStadium]);
+            setNewHomeStadium("");
         }
     };
 
-    // Add neutral stadium
+    // Add new neutral stadium
     const addNeutralStadium = () => {
-        if (newStadium.trim() !== "" && !neutralStadiums.includes(newStadium.trim())) {
-            setNeutralStadiums([...neutralStadiums, newStadium.trim()]);
-            setNewStadium("");
+        if (newNeutralStadium.trim() !== "" && !neutralStadiums.includes(newNeutralStadium)) {
+            setNeutralStadiums([...neutralStadiums, newNeutralStadium]);
+            setNewNeutralStadium("");
         }
-    };
-
-    // Generate League Schedule (each team plays every other team twice)
-    const generateSchedule = () => {
-        let matches = [];
-        for (let i = 0; i < teams.length; i++) {
-            for (let j = 0; j < teams.length; j++) {
-                if (i !== j) {
-                    let stadium = useHomeVenues
-                        ? homeStadiums[teams[i]] || "TBA"
-                        : neutralStadiums[Math.floor(Math.random() * neutralStadiums.length)] || "TBA";
-
-                    matches.push(`${teams[i]} vs ${teams[j]} at ${stadium}`);
-                }
-            }
-        }
-        setSchedule(matches);
     };
 
     return (
-        <div>
-            <h2>League Tournament</h2>
+        <div className="league-container">
+            <h2>League Format</h2>
 
-            {/* Input for adding teams */}
-            <input type="text" value={newTeam} onChange={(e) => setNewTeam(e.target.value)} placeholder="Enter team name" />
-            <button onClick={addTeam}>Add Team</button>
+            {/* Team Input Section */}
+            <div className="input-section">
+                <input
+                    type="text"
+                    placeholder="Enter team name"
+                    value={newTeam}
+                    onChange={(e) => setNewTeam(e.target.value)}
+                />
+                <button onClick={addTeam}>Add Team</button>
+            </div>
 
-            {/* Input for setting home stadium */}
-            <input type="text" value={newStadium} onChange={(e) => setNewStadium(e.target.value)} placeholder="Enter home stadium" />
-            <button onClick={addHomeStadium}>Set Home Stadium</button>
+            {/* Home Stadium Input */}
+            <div className="input-section">
+                <input
+                    type="text"
+                    placeholder="Enter home stadium"
+                    value={newHomeStadium}
+                    onChange={(e) => setNewHomeStadium(e.target.value)}
+                />
+                <button onClick={addHomeStadium}>Add Home Stadium</button>
+            </div>
 
-            {/* Input for adding neutral stadiums */}
-            <button onClick={addNeutralStadium}>Add Neutral Stadium</button>
+            {/* Neutral Stadium Input */}
+            <div className="input-section">
+                <input
+                    type="text"
+                    placeholder="Enter neutral stadium"
+                    value={newNeutralStadium}
+                    onChange={(e) => setNewNeutralStadium(e.target.value)}
+                />
+                <button onClick={addNeutralStadium}>Add Neutral Stadium</button>
+            </div>
 
-            {/* Option to use home venues */}
-            <label>
-                <input type="checkbox" checked={useHomeVenues} onChange={() => setUseHomeVenues(!useHomeVenues)} />
-                Use Home Venues
-            </label>
+            {/* Display Teams */}
+            <h3>Teams</h3>
+            <ul className="team-list">
+                {teams.map((team, index) => (
+                    <li key={index}>{team}</li>
+                ))}
+            </ul>
 
-            {/* Generate Schedule */}
-            <button onClick={generateSchedule}>Generate Schedule</button>
+            {/* Display Home Stadiums */}
+            <h3>Home Stadiums</h3>
+            <ul className="stadium-list">
+                {homeStadiums.map((stadium, index) => (
+                    <li key={index}>{stadium}</li>
+                ))}
+            </ul>
 
-            {/* Display Schedule */}
-            <ul>
-                {schedule.map((match, index) => (
-                    <li key={index}>{match}</li>
+            {/* Display Neutral Stadiums */}
+            <h3>Neutral Stadiums</h3>
+            <ul className="stadium-list">
+                {neutralStadiums.map((stadium, index) => (
+                    <li key={index}>{stadium}</li>
                 ))}
             </ul>
         </div>
