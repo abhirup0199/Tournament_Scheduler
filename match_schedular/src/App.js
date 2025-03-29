@@ -40,6 +40,7 @@ const Main = () => {
             </select>
 
             <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/league" element={<League />} />
                 <Route path="/roundrobin" element={<RoundRobin />} />
                 <Route path="/doubleroundrobin" element={<DoubleRoundRobin />} />
@@ -49,5 +50,11 @@ const Main = () => {
         </div>
     );
 };
+
+const Home = () => (
+    <div className="home">
+        <h2>Welcome! Select a Tournament Format to Continue.</h2>
+    </div>
+);
 
 export default App;
