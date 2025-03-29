@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HashRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import League from "./pages/League";
 import RoundRobin from "./pages/RoundRobin";
 import Knockout from "./pages/Knockout";
@@ -9,7 +9,7 @@ import "./App.css";
 
 const App = () => {
     return (
-        <Router>
+        <Router basename="/">
             <Main />
         </Router>
     );
